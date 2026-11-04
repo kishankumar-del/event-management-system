@@ -27,18 +27,18 @@
 | [x] | Centralized Error Handling | One error middleware + custom `AppError` class + `catchAsync` wrapper | Verified in `backend/src/utils/AppError.js`, `backend/src/middleware/errorHandler.js` |
 | [x] | Standard Error Response Shape | Consistent JSON error output `{ status, message, errors }` | Verified via 404 test in `backend/tests/health.test.js` |
 | [x] | Server-Side Input Validation | `express-validator` on all mutation endpoints | Verified in `backend/src/validators/*`, tested in `backend/tests/validation.test.js` |
-| [ ] | User API (Admin CRUD) | List, get, update role/status, delete with pagination & filters | `GET/PATCH/DELETE /api/users` |
-| [ ] | Venue API (CRUD) | List (public), create (org/admin), update, delete with city filter | `GET/POST/PATCH/DELETE /api/venues` |
-| [ ] | Event API (CRUD) | Search, filter (category, city, status), sort, pagination | `GET/POST/PATCH/DELETE /api/events` |
-| [ ] | TicketType API (CRUD) | Create tiers per event, view tiers, edit, delete | `GET/POST/PATCH/DELETE /api/ticket-types` |
-| [ ] | Registration API (CRUD) | Create booking, view (scoped by role), cancel, check-in | `GET/POST/PATCH /api/registrations` |
-| [ ] | Payment API (Tracking) | Record simulated payment, list receipts, get receipt | `GET/POST /api/payments` |
-| [ ] | Search, Filters & Sorting | Multi-field text search, query filters, sort ascending/descending | Tested on `/api/events?search=...&sort=...` |
-| [ ] | Pagination Contract | List endpoints return `{ data, page, limit, total, totalPages }` | Verified on all 6 list endpoints |
-| [ ] | Atomic Oversell Prevention | `$inc: { quantitySold: Q }` with conditional `$expr` boundary check | Tested with concurrent/excess requests |
-| [ ] | Sale Window & Status Guards | Reject registration if event not published or `now` outside `saleStart`-`saleEnd` | Unit/integration test with boundary timestamps |
-| [ ] | Inventory Restoration on Cancel | Cancelling registration restores `quantitySold` atomically | Tested via `PATCH /api/registrations/:id/cancel` |
-| [ ] | MongoDB Aggregation Reports | Registrations per event, revenue by event, attendance rate, ticket tier breakdown | `GET /api/reports/organizer`, `GET /api/reports/admin` |
+| [x] | User API (Admin CRUD) | List, get, update role/status, delete with pagination & filters | Verified in `backend/src/controllers/userController.js`, `backend/src/routes/userRoutes.js` |
+| [x] | Venue API (CRUD) | List (public), create (org/admin), update, delete with city filter | Verified in `backend/src/controllers/venueController.js`, `backend/src/routes/venueRoutes.js` |
+| [x] | Event API (CRUD) | Search, filter (category, city, status), sort, pagination | Verified in `backend/src/controllers/eventController.js`, `backend/src/routes/eventRoutes.js` |
+| [x] | TicketType API (CRUD) | Create tiers per event, view tiers, edit, delete | Verified in `backend/src/controllers/ticketTypeController.js`, `backend/src/routes/ticketTypeRoutes.js` |
+| [x] | Registration API (CRUD) | Create booking, view (scoped by role), cancel, check-in | Verified in `backend/src/controllers/registrationController.js`, `backend/src/routes/registrationRoutes.js` |
+| [x] | Payment API (Tracking) | Record simulated payment, list receipts, get receipt | Verified in `backend/src/controllers/paymentController.js`, `backend/src/routes/paymentRoutes.js` |
+| [x] | Search, Filters & Sorting | Multi-field text search, query filters, sort ascending/descending | Verified in `backend/src/utils/apiFeatures.js` |
+| [x] | Pagination Contract | List endpoints return `{ data, page, limit, total, totalPages }` | Verified across all 6 model controllers |
+| [x] | Atomic Oversell Prevention | `$inc: { quantitySold: Q }` with conditional `$expr` boundary check | Verified in `backend/src/services/registrationService.js` |
+| [x] | Sale Window & Status Guards | Reject registration if event not published or `now` outside `saleStart`-`saleEnd` | Verified in `backend/src/services/registrationService.js` & `backend/tests/businessRules.test.js` |
+| [x] | Inventory Restoration on Cancel | Cancelling registration restores `quantitySold` atomically | Verified in `backend/src/services/registrationService.js` |
+| [x] | MongoDB Aggregation Reports | Registrations per event, revenue by event, attendance rate, ticket tier breakdown | Verified in `backend/src/services/reportService.js` & `backend/src/routes/reportRoutes.js` |
 | [x] | Health Check Endpoint | `GET /api/health` returning 200 OK and uptime for Render pinging | Verified via `backend/tests/health.test.js` (200 OK) |
 
 ---
@@ -69,9 +69,9 @@
 | [x] | Sensitive Field Masking | `passwordHash` has `select: false` and is never returned in API responses | Verified in `backend/src/services/authService.js` & tests |
 | [x] | JWT Generation & Verification | Secure JWT tokens signed with expiration and secret from env | Verified in `backend/src/services/authService.js`, `backend/src/middleware/auth.js` |
 | [x] | RBAC Middleware | `authorizeRoles('admin', 'organizer', 'attendee')` route guarding | Verified: 403 Forbidden on unauthorized roles in `backend/tests/auth.test.js` |
-| [ ] | Record Isolation (Attendee) | Attendees can only query/view their own registrations and payments | Enforced in services & queries |
-| [ ] | Record Isolation (Organizer)| Organizers can only manage their own events, venues, and registrations | Enforced in services & queries |
-| [ ] | Global Access (Admin) | Admin accounts bypass ownership restrictions to moderate all records | Admin endpoints & queries verified |
+| [x] | Record Isolation (Attendee) | Attendees can only query/view their own registrations and payments | Enforced in `registrationController.js` and `paymentController.js` |
+| [x] | Record Isolation (Organizer)| Organizers can only manage their own events, venues, and registrations | Enforced in `eventController.js`, `venueController.js`, `registrationController.js` |
+| [x] | Global Access (Admin) | Admin accounts bypass ownership restrictions to moderate all records | Verified across controllers with RBAC bypass |
 | [x] | Admin Self-Registration Block | `/api/auth/register` rejects attempts to create `admin` role | Verified in `backend/tests/validation.test.js` (400 validation error) |
 | [x] | Security Middlewares | `helmet`, `express-mongo-sanitize`, `express-rate-limit` on auth routes | Verified in `backend/app.js` & `backend/src/routes/authRoutes.js` |
 | [x] | CORS Restriction | CORS origin restricted to frontend URL from environment variable | Verified in `backend/app.js` |
@@ -117,7 +117,7 @@
 | [ ] | Clean Git Repository | Logical semantic commits (`feat`, `chore`, `style`, `docs`) | `git log --oneline` |
 | [ ] | Strict `.gitignore` | Zero `.env`, `node_modules`, or build artifacts tracked in git | `git ls-files .env` returns empty |
 | [ ] | Comprehensive README | Overview, features per role, tech stack, env table, setup guide, credentials | `README.md` |
-| [ ] | Postman Collection | Exported collection with folders per resource, environment, demo requests | `docs/Event_Management_System.postman_collection.json` |
+| [x] | Postman Collection | Exported collection with folders per resource, environment, demo requests | Verified in `docs/Event_Management_System.postman_collection.json` |
 | [ ] | ER Diagram | Mermaid ER diagram and visual graphic in `docs/` | `docs/er-diagram.md`, `docs/er-diagram.svg` |
 | [ ] | Application Screenshots | Visual screenshots of key screens per role in `docs/screenshots/` | PNG images in `docs/screenshots/` |
 | [ ] | Demo Video Script | Detailed 2-3 minute scene-by-scene presentation walkthrough | `docs/demo-script.md` |
@@ -130,7 +130,7 @@
 - [x] **Phase 1: Repo Scaffold, Tooling & Core Config** (Verified: .gitignore, .env handling, health test pass)
 - [x] **Phase 2: Mongoose Models, Indexes & Database Seeding** (Verified: 6 schemas, indexes, validation tests, seed script)
 - [x] **Phase 3: Auth, RBAC Middleware, Validation & Central Error Handling** (Verified: JWT, register/login, RBAC 401/403, 20 tests pass)
-- [ ] **Phase 4: REST APIs for All 6 Resources & Aggregation Reports**
+- [x] **Phase 4: REST APIs for All 6 Resources & Aggregation Reports** (Verified: controllers, services, routes, business rules, Postman collection)
 - [ ] **Phase 5: Frontend Foundation, Tokens & Impeccable Step 2 (Visual Sign-Off)**
 - [ ] **Phase 6: Complete CRUD Screens & Role Dashboards**
 - [ ] **Phase 7: Reports & Analytics Dashboard (Pure SVG/CSS)**

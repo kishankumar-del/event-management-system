@@ -1,0 +1,490 @@
+{
+  "info": {
+    "name": "Event Management System API (Project 9)",
+    "description": "Comprehensive REST collection covering all 6 models, RBAC flows, business logic, and aggregation reports.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. System Health",
+      "item": [
+        {
+          "name": "Health Check (Render Uptime)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register Attendee",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Julian Barnes\",\n  \"email\": \"julian@example.com\",\n  \"password\": \"User@123456\",\n  \"role\": \"attendee\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Register Organizer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Vanguard Productions\",\n  \"email\": \"vanguard@example.com\",\n  \"password\": \"Org@123456\",\n  \"role\": \"organizer\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Attempt Self-Register Admin (Should Fail 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Fake Admin\",\n  \"email\": \"fakeadmin@example.com\",\n  \"password\": \"Admin@123456\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.environment.set('token', res.token);",
+                  "  pm.environment.set('adminToken', res.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@eventbox.com\",\n  \"password\": \"Admin@123456\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Login as Organizer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.environment.set('token', res.token);",
+                  "  pm.environment.set('organizerToken', res.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"organizer1@eventbox.com\",\n  \"password\": \"Org@123456\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Login as Attendee",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.environment.set('token', res.token);",
+                  "  pm.environment.set('attendeeToken', res.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"attendee1@eventbox.com\",\n  \"password\": \"User@123456\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User Profile (Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api", "auth", "me"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/logout", "host": ["{{baseUrl}}"], "path": ["api", "auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Users (Admin)",
+      "item": [
+        {
+          "name": "List Users (Paginated & Search)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?page=1&limit=10&role=attendee",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "role", "value": "attendee" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "users", "{{userId}}"] }
+          }
+        },
+        {
+          "name": "Update User Role or Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"role\": \"organizer\",\n  \"isActive\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/api/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "users", "{{userId}}"] }
+          }
+        },
+        {
+          "name": "Deactivate User",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "users", "{{userId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Venues",
+      "item": [
+        {
+          "name": "List Venues (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/venues?city=New York", "host": ["{{baseUrl}}"], "path": ["api", "venues"], "query": [{ "key": "city", "value": "New York" }] }
+          }
+        },
+        {
+          "name": "Get Venue by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/venues/{{venueId}}", "host": ["{{baseUrl}}"], "path": ["api", "venues", "{{venueId}}"] }
+          }
+        },
+        {
+          "name": "Create Venue (Organizer / Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Beacon Amphitheater\",\n  \"address\": \"89 Shoreline Promenade\",\n  \"city\": \"Seattle\",\n  \"capacity\": 600\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/venues", "host": ["{{baseUrl}}"], "path": ["api", "venues"] }
+          }
+        },
+        {
+          "name": "Update Venue",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"capacity\": 650\n}" },
+            "url": { "raw": "{{baseUrl}}/api/venues/{{venueId}}", "host": ["{{baseUrl}}"], "path": ["api", "venues", "{{venueId}}"] }
+          }
+        },
+        {
+          "name": "Delete Venue",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{organizerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/venues/{{venueId}}", "host": ["{{baseUrl}}"], "path": ["api", "venues", "{{venueId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Events",
+      "item": [
+        {
+          "name": "List Events (Public / Search & Filter)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/events?page=1&limit=10&category=Concert&sort=startDate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "events"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "category", "value": "Concert" },
+                { "key": "sort", "value": "startDate" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Event by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/events/{{eventId}}", "host": ["{{baseUrl}}"], "path": ["api", "events", "{{eventId}}"] }
+          }
+        },
+        {
+          "name": "Create Event (Organizer / Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Northwest Chamber Brass Guild Recital\",\n  \"description\": \"An intimate evening of classical and contemporary brass repertoire.\",\n  \"category\": \"Concert\",\n  \"startDate\": \"2026-11-20T19:00:00.000Z\",\n  \"endDate\": \"2026-11-20T22:00:00.000Z\",\n  \"venue\": \"{{venueId}}\",\n  \"capacity\": 300,\n  \"status\": \"published\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/events", "host": ["{{baseUrl}}"], "path": ["api", "events"] }
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"published\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/events/{{eventId}}", "host": ["{{baseUrl}}"], "path": ["api", "events", "{{eventId}}"] }
+          }
+        },
+        {
+          "name": "Delete or Cancel Event",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{organizerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/events/{{eventId}}", "host": ["{{baseUrl}}"], "path": ["api", "events", "{{eventId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Ticket Types",
+      "item": [
+        {
+          "name": "List Ticket Types by Event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/ticket-types?event={{eventId}}", "host": ["{{baseUrl}}"], "path": ["api", "ticket-types"], "query": [{ "key": "event", "value": "{{eventId}}" }] }
+          }
+        },
+        {
+          "name": "Create Ticket Tier",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"{{eventId}}\",\n  \"name\": \"Front Orchestra\",\n  \"price\": 75,\n  \"quantityTotal\": 100,\n  \"saleStart\": \"2026-11-01T00:00:00.000Z\",\n  \"saleEnd\": \"2026-11-20T18:00:00.000Z\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/ticket-types", "host": ["{{baseUrl}}"], "path": ["api", "ticket-types"] }
+          }
+        },
+        {
+          "name": "Update Ticket Tier",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"price\": 80\n}" },
+            "url": { "raw": "{{baseUrl}}/api/ticket-types/{{ticketTypeId}}", "host": ["{{baseUrl}}"], "path": ["api", "ticket-types", "{{ticketTypeId}}"] }
+          }
+        },
+        {
+          "name": "Delete Ticket Tier",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{organizerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/ticket-types/{{ticketTypeId}}", "host": ["{{baseUrl}}"], "path": ["api", "ticket-types", "{{ticketTypeId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Registrations",
+      "item": [
+        {
+          "name": "Register Tickets (Atomic Oversell Check + Payment)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{attendeeToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"{{eventId}}\",\n  \"ticketTypeId\": \"{{ticketTypeId}}\",\n  \"quantity\": 2,\n  \"paymentMethod\": \"card\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/registrations", "host": ["{{baseUrl}}"], "path": ["api", "registrations"] }
+          }
+        },
+        {
+          "name": "List Registrations (Scoped by Role)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/registrations?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["api", "registrations"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] }
+          }
+        },
+        {
+          "name": "Get Registration by ID (Stub Data)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/registrations/{{registrationId}}", "host": ["{{baseUrl}}"], "path": ["api", "registrations", "{{registrationId}}"] }
+          }
+        },
+        {
+          "name": "Check-In Attendee (Organizer / Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{organizerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"attendance\": \"checked_in\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/registrations/{{registrationId}}/check-in", "host": ["{{baseUrl}}"], "path": ["api", "registrations", "{{registrationId}}", "check-in"] }
+          }
+        },
+        {
+          "name": "Cancel Registration (Restores Inventory)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{attendeeToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/registrations/{{registrationId}}/cancel", "host": ["{{baseUrl}}"], "path": ["api", "registrations", "{{registrationId}}", "cancel"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Payments",
+      "item": [
+        {
+          "name": "List Payments (Scoped by Role)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/payments?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["api", "payments"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] }
+          }
+        },
+        {
+          "name": "Get Payment Receipt by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/payments/{{paymentId}}", "host": ["{{baseUrl}}"], "path": ["api", "payments", "{{paymentId}}"] }
+          }
+        },
+        {
+          "name": "Refund Payment (Admin / Organizer)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/payments/{{paymentId}}/refund", "host": ["{{baseUrl}}"], "path": ["api", "payments", "{{paymentId}}", "refund"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Reports (MongoDB Aggregation)",
+      "item": [
+        {
+          "name": "Organizer Performance Report",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{organizerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/reports/organizer", "host": ["{{baseUrl}}"], "path": ["api", "reports", "organizer"] }
+          }
+        },
+        {
+          "name": "Admin Global Analytics Report",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/reports/admin", "host": ["{{baseUrl}}"], "path": ["api", "reports", "admin"] }
+          }
+        }
+      ]
+    }
+  ]
+}
