@@ -26,7 +26,7 @@
 | [x] | Separate Architecture Layers | Explicit separation: router, controller, middleware, service, model, db config | Verified in `backend/src/{routes,controllers,middleware,config}` |
 | [x] | Centralized Error Handling | One error middleware + custom `AppError` class + `catchAsync` wrapper | Verified in `backend/src/utils/AppError.js`, `backend/src/middleware/errorHandler.js` |
 | [x] | Standard Error Response Shape | Consistent JSON error output `{ status, message, errors }` | Verified via 404 test in `backend/tests/health.test.js` |
-| [ ] | Server-Side Input Validation | `express-validator` on all mutation endpoints | `backend/src/validators/*`, 400 responses with field errors |
+| [x] | Server-Side Input Validation | `express-validator` on all mutation endpoints | Verified in `backend/src/validators/*`, tested in `backend/tests/validation.test.js` |
 | [ ] | User API (Admin CRUD) | List, get, update role/status, delete with pagination & filters | `GET/PATCH/DELETE /api/users` |
 | [ ] | Venue API (CRUD) | List (public), create (org/admin), update, delete with city filter | `GET/POST/PATCH/DELETE /api/venues` |
 | [ ] | Event API (CRUD) | Search, filter (category, city, status), sort, pagination | `GET/POST/PATCH/DELETE /api/events` |
@@ -65,16 +65,16 @@
 
 | Status | Requirement | Scope & Constraints | Evidence / Verification Target |
 |:---:|---|---|---|
-| [ ] | Password Hashing | `bcrypt` with salt rounds >= 12 | `backend/src/models/User.js` pre-save hook |
-| [ ] | Sensitive Field Masking | `passwordHash` has `select: false` and is never returned in API responses | Verified in login/register/me API payloads |
-| [ ] | JWT Generation & Verification | Secure JWT tokens signed with expiration and secret from env | `backend/src/services/authService.js`, `backend/src/middleware/auth.js` |
-| [ ] | RBAC Middleware | `authorizeRoles('admin', 'organizer', 'attendee')` route guarding | 403 Forbidden verified for unauthorized roles |
+| [x] | Password Hashing | `bcrypt` with salt rounds >= 12 | Verified in `backend/src/models/User.js` pre-save hook |
+| [x] | Sensitive Field Masking | `passwordHash` has `select: false` and is never returned in API responses | Verified in `backend/src/services/authService.js` & tests |
+| [x] | JWT Generation & Verification | Secure JWT tokens signed with expiration and secret from env | Verified in `backend/src/services/authService.js`, `backend/src/middleware/auth.js` |
+| [x] | RBAC Middleware | `authorizeRoles('admin', 'organizer', 'attendee')` route guarding | Verified: 403 Forbidden on unauthorized roles in `backend/tests/auth.test.js` |
 | [ ] | Record Isolation (Attendee) | Attendees can only query/view their own registrations and payments | Enforced in services & queries |
 | [ ] | Record Isolation (Organizer)| Organizers can only manage their own events, venues, and registrations | Enforced in services & queries |
 | [ ] | Global Access (Admin) | Admin accounts bypass ownership restrictions to moderate all records | Admin endpoints & queries verified |
-| [ ] | Admin Self-Registration Block | `/api/auth/register` rejects attempts to create `admin` role | Tested via POST `/api/auth/register` with role admin |
-| [ ] | Security Middlewares | `helmet`, `express-mongo-sanitize`, `express-rate-limit` on auth routes | `backend/src/app.js` middleware stack |
-| [ ] | CORS Restriction | CORS origin restricted to frontend URL from environment variable | Tested with custom Origin header |
+| [x] | Admin Self-Registration Block | `/api/auth/register` rejects attempts to create `admin` role | Verified in `backend/tests/validation.test.js` (400 validation error) |
+| [x] | Security Middlewares | `helmet`, `express-mongo-sanitize`, `express-rate-limit` on auth routes | Verified in `backend/app.js` & `backend/src/routes/authRoutes.js` |
+| [x] | CORS Restriction | CORS origin restricted to frontend URL from environment variable | Verified in `backend/app.js` |
 
 ---
 
@@ -129,7 +129,7 @@
 
 - [x] **Phase 1: Repo Scaffold, Tooling & Core Config** (Verified: .gitignore, .env handling, health test pass)
 - [x] **Phase 2: Mongoose Models, Indexes & Database Seeding** (Verified: 6 schemas, indexes, validation tests, seed script)
-- [ ] **Phase 3: Auth, RBAC Middleware, Validation & Central Error Handling**
+- [x] **Phase 3: Auth, RBAC Middleware, Validation & Central Error Handling** (Verified: JWT, register/login, RBAC 401/403, 20 tests pass)
 - [ ] **Phase 4: REST APIs for All 6 Resources & Aggregation Reports**
 - [ ] **Phase 5: Frontend Foundation, Tokens & Impeccable Step 2 (Visual Sign-Off)**
 - [ ] **Phase 6: Complete CRUD Screens & Role Dashboards**
