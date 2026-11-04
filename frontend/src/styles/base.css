@@ -1,0 +1,108 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+h1.page-title {
+  font-style: italic;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+
+h2.section-title {
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-bottom: var(--space-3);
+}
+
+p {
+  color: var(--color-ink);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Interactive elements & 44px touch targets */
+button, input, select, textarea, a {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: inherit;
+}
+
+button, a {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* High contrast accessible focus state */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Hairline dividers */
+hr {
+  border: none;
+  border-top: var(--border-hairline);
+  margin: var(--space-6) 0;
+}
+
+/* Links */
+a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

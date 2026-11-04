@@ -23,9 +23,9 @@
 
 | Status | Requirement | Scope & Constraints | Evidence / Verification Target |
 |:---:|---|---|---|
-| [ ] | Separate Architecture Layers | Explicit separation: router, controller, middleware, service, model, db config | `backend/src/{routes,controllers,middleware,services,models,config}` |
-| [ ] | Centralized Error Handling | One error middleware + custom `AppError` class + `catchAsync` wrapper | `backend/src/utils/AppError.js`, `backend/src/middleware/errorHandler.js` |
-| [ ] | Standard Error Response Shape | Consistent JSON error output `{ status, message, errors }` | Tested via invalid payloads & 404 routes |
+| [x] | Separate Architecture Layers | Explicit separation: router, controller, middleware, service, model, db config | Verified in `backend/src/{routes,controllers,middleware,config}` |
+| [x] | Centralized Error Handling | One error middleware + custom `AppError` class + `catchAsync` wrapper | Verified in `backend/src/utils/AppError.js`, `backend/src/middleware/errorHandler.js` |
+| [x] | Standard Error Response Shape | Consistent JSON error output `{ status, message, errors }` | Verified via 404 test in `backend/tests/health.test.js` |
 | [ ] | Server-Side Input Validation | `express-validator` on all mutation endpoints | `backend/src/validators/*`, 400 responses with field errors |
 | [ ] | User API (Admin CRUD) | List, get, update role/status, delete with pagination & filters | `GET/PATCH/DELETE /api/users` |
 | [ ] | Venue API (CRUD) | List (public), create (org/admin), update, delete with city filter | `GET/POST/PATCH/DELETE /api/venues` |
@@ -39,7 +39,7 @@
 | [ ] | Sale Window & Status Guards | Reject registration if event not published or `now` outside `saleStart`-`saleEnd` | Unit/integration test with boundary timestamps |
 | [ ] | Inventory Restoration on Cancel | Cancelling registration restores `quantitySold` atomically | Tested via `PATCH /api/registrations/:id/cancel` |
 | [ ] | MongoDB Aggregation Reports | Registrations per event, revenue by event, attendance rate, ticket tier breakdown | `GET /api/reports/organizer`, `GET /api/reports/admin` |
-| [ ] | Health Check Endpoint | `GET /api/health` returning 200 OK and uptime for Render pinging | Tested with curl / browser |
+| [x] | Health Check Endpoint | `GET /api/health` returning 200 OK and uptime for Render pinging | Verified via `backend/tests/health.test.js` (200 OK) |
 
 ---
 
@@ -47,7 +47,7 @@
 
 | Status | Requirement | Scope & Constraints | Evidence / Verification Target |
 |:---:|---|---|---|
-| [ ] | Standalone DB Connection | MongoDB connection configured in dedicated file with lifecycle events | `backend/src/config/db.js` |
+| [x] | Standalone DB Connection | MongoDB connection configured in dedicated file with lifecycle events | Verified in `backend/src/config/db.js` |
 | [ ] | MongoDB Atlas Connection | Connects to remote MongoDB Atlas cluster via connection string | Environment variable `MONGODB_URI` |
 | [ ] | User Model | `name`, `email` (unique), `passwordHash` (select: false), `role`, `isActive`, timestamps | `backend/src/models/User.js` |
 | [ ] | Venue Model & Indexes | `name`, `address`, `city`, `capacity`, `createdBy(ref)`. Indexes on `city` and `name` | `backend/src/models/Venue.js` |
@@ -127,7 +127,7 @@
 
 ## Phase Execution Checklist
 
-- [ ] **Phase 1: Repo Scaffold, Tooling & Core Config**
+- [x] **Phase 1: Repo Scaffold, Tooling & Core Config** (Verified: .gitignore, .env handling, health test pass)
 - [ ] **Phase 2: Mongoose Models, Indexes & Database Seeding**
 - [ ] **Phase 3: Auth, RBAC Middleware, Validation & Central Error Handling**
 - [ ] **Phase 4: REST APIs for All 6 Resources & Aggregation Reports**
