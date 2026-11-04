@@ -49,15 +49,15 @@
 |:---:|---|---|---|
 | [x] | Standalone DB Connection | MongoDB connection configured in dedicated file with lifecycle events | Verified in `backend/src/config/db.js` |
 | [ ] | MongoDB Atlas Connection | Connects to remote MongoDB Atlas cluster via connection string | Environment variable `MONGODB_URI` |
-| [ ] | User Model | `name`, `email` (unique), `passwordHash` (select: false), `role`, `isActive`, timestamps | `backend/src/models/User.js` |
-| [ ] | Venue Model & Indexes | `name`, `address`, `city`, `capacity`, `createdBy(ref)`. Indexes on `city` and `name` | `backend/src/models/Venue.js` |
-| [ ] | Event Model & Indexes | `title`, `description`, `category`, `startDate`, `endDate`, `venue(ref)`, `organizer(ref)`, `status`, `capacity`. Text index on title/desc; compound index on status+startDate | `backend/src/models/Event.js` |
-| [ ] | TicketType Model & Indexes | `event(ref)`, `name`, `price`, `quantityTotal`, `quantitySold`, `saleStart`, `saleEnd`. Unique index on event+name | `backend/src/models/TicketType.js` |
-| [ ] | Registration Model & Indexes | `user(ref)`, `event(ref)`, `ticketType(ref)`, `quantity`, `status`, `attendance`, `checkedInAt`, `registrationCode`. Unique index on user+event+ticketType; index on event | `backend/src/models/Registration.js` |
-| [ ] | Payment Model & Indexes | `registration(ref)`, `amount`, `method`, `status`, `reference` (unique), `paidAt` | `backend/src/models/Payment.js` |
+| [x] | User Model | `name`, `email` (unique), `passwordHash` (select: false), `role`, `isActive`, timestamps | Verified in `backend/src/models/User.js` & `backend/tests/models.test.js` |
+| [x] | Venue Model & Indexes | `name`, `address`, `city`, `capacity`, `createdBy(ref)`. Indexes on `city` and `name` | Verified in `backend/src/models/Venue.js` & `backend/tests/models.test.js` |
+| [x] | Event Model & Indexes | `title`, `description`, `category`, `startDate`, `endDate`, `venue(ref)`, `organizer(ref)`, `status`, `capacity`. Text index on title/desc; compound index on status+startDate | Verified in `backend/src/models/Event.js` & `backend/tests/models.test.js` |
+| [x] | TicketType Model & Indexes | `event(ref)`, `name`, `price`, `quantityTotal`, `quantitySold`, `saleStart`, `saleEnd`. Unique index on event+name | Verified in `backend/src/models/TicketType.js` & `backend/tests/models.test.js` |
+| [x] | Registration Model & Indexes | `user(ref)`, `event(ref)`, `ticketType(ref)`, `quantity`, `status`, `attendance`, `checkedInAt`, `registrationCode`. Unique index on user+event+ticketType; index on event | Verified in `backend/src/models/Registration.js` & `backend/tests/models.test.js` |
+| [x] | Payment Model & Indexes | `registration(ref)`, `amount`, `method`, `status`, `reference` (unique), `paidAt` | Verified in `backend/src/models/Payment.js` & `backend/tests/models.test.js` |
 | [ ] | Model Relationships (Refs) | Real Mongoose `ref` relations populated on retrieval | `populate('venue organizer ticketType user')` verified |
-| [ ] | Idempotent Seed Script | Seeds 1 admin, 2 organizers, 5 attendees, 3 venues, 6 events, ticket tiers, registrations, payments | `node src/seed/seed.js` execution logs |
-| [ ] | Printed Demo Credentials | Seed script logs clean table of demo accounts and passwords | Console output from seed execution |
+| [x] | Idempotent Seed Script | Seeds 1 admin, 2 organizers, 5 attendees, 3 venues, 6 events, ticket tiers, registrations, payments | Verified in `backend/src/seed/seed.js` |
+| [x] | Printed Demo Credentials | Seed script logs clean table of demo accounts and passwords | Verified in `backend/src/seed/seed.js` |
 
 ---
 
@@ -128,7 +128,7 @@
 ## Phase Execution Checklist
 
 - [x] **Phase 1: Repo Scaffold, Tooling & Core Config** (Verified: .gitignore, .env handling, health test pass)
-- [ ] **Phase 2: Mongoose Models, Indexes & Database Seeding**
+- [x] **Phase 2: Mongoose Models, Indexes & Database Seeding** (Verified: 6 schemas, indexes, validation tests, seed script)
 - [ ] **Phase 3: Auth, RBAC Middleware, Validation & Central Error Handling**
 - [ ] **Phase 4: REST APIs for All 6 Resources & Aggregation Reports**
 - [ ] **Phase 5: Frontend Foundation, Tokens & Impeccable Step 2 (Visual Sign-Off)**
