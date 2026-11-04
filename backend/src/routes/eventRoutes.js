@@ -18,3 +18,4 @@ router.route('/:id')
   .delete(auth, authorizeRoles('organizer', 'admin'), eventController.deleteEvent);
 
 module.exports = router;
+

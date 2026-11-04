@@ -17,3 +17,4 @@ router.route('/:id')
   .delete(auth, authorizeRoles('organizer', 'admin'), venueController.deleteVenue);
 
 module.exports = router;
+

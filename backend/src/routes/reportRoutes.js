@@ -11,3 +11,4 @@ router.get('/organizer', authorizeRoles('organizer', 'admin'), reportController.
 router.get('/admin', authorizeRoles('admin'), reportController.getAdminReport);
 
 module.exports = router;
+

@@ -76,3 +76,4 @@ registrationSchema.pre('validate', function (next) {
 const Registration = mongoose.model('Registration', registrationSchema);
 
 module.exports = Registration;
+

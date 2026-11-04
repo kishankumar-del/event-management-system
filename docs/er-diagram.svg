@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700">
+  <defs>
+    <style>
+      .bg { fill: #F4EFE6; }
+      .entity-box { fill: #FBF8F2; stroke: #D8D0C0; stroke-width: 1.5; }
+      .header-bg { fill: #17140F; }
+      .header-accent { fill: #D9411E; }
+      .header-text { fill: #FBF8F2; font-family: 'Newsreader', Georgia, serif; font-size: 15px; font-weight: 600; }
+      .field-text { fill: #17140F; font-family: 'Schibsted Grotesk', -apple-system, sans-serif; font-size: 12px; }
+      .pk-text { fill: #D9411E; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; }
+      .fk-text { fill: #2F5D3A; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; }
+      .type-text { fill: #6B655A; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+      .connector { stroke: #6B655A; stroke-width: 1.5; stroke-dasharray: 4 2; fill: none; }
+      .connector-solid { stroke: #17140F; stroke-width: 1.5; fill: none; }
+      .title-text { fill: #17140F; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-style: italic; }
+      .subtitle-text { fill: #6B655A; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1100" height="700" class="bg" />
+
+  <!-- Diagram Title -->
+  <text x="40" y="45" class="title-text">Event Management System — Entity Relationship Schema</text>
+  <text x="40" y="68" class="subtitle-text">BOX OFFICE RELATIONAL ARCHITECTURE • 6 MONGOOSE SCHEMAS WITH CONSTRAINTS</text>
+
+  <!-- 1. USER ENTITY -->
+  <g transform="translate(40, 100)">
+    <rect width="220" height="200" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 217 0 Q 220 0 220 3 L 220 32 L 0 32 Z" class="header-bg" />
+    <text x="12" y="22" class="header-text">User</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="130" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="field-text">name</text><text x="130" y="77" class="type-text">String</text>
+    <text x="12" y="99" class="field-text">email (UQ)</text><text x="130" y="99" class="type-text">String</text>
+    <text x="12" y="121" class="field-text">passwordHash</text><text x="130" y="121" class="type-text">String*</text>
+    <text x="12" y="143" class="field-text">role [enum]</text><text x="130" y="143" class="type-text">String</text>
+    <text x="12" y="165" class="field-text">isActive</text><text x="130" y="165" class="type-text">Boolean</text>
+    <text x="12" y="187" class="field-text">timestamps</text><text x="130" y="187" class="type-text">Date</text>
+  </g>
+
+  <!-- 2. VENUE ENTITY -->
+  <g transform="translate(40, 360)">
+    <rect width="220" height="180" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 217 0 Q 220 0 220 3 L 220 32 L 0 32 Z" class="header-bg" />
+    <text x="12" y="22" class="header-text">Venue</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="130" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="field-text">name</text><text x="130" y="77" class="type-text">String</text>
+    <text x="12" y="99" class="field-text">address</text><text x="130" y="99" class="type-text">String</text>
+    <text x="12" y="121" class="field-text">city (IDX)</text><text x="130" y="121" class="type-text">String</text>
+    <text x="12" y="143" class="field-text">capacity</text><text x="130" y="143" class="type-text">Number</text>
+    <text x="12" y="165" class="fk-text">FK  createdBy</text><text x="130" y="165" class="type-text">ref:User</text>
+  </g>
+
+  <!-- 3. EVENT ENTITY -->
+  <g transform="translate(340, 100)">
+    <rect width="250" height="240" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 247 0 Q 250 0 250 3 L 250 32 L 0 32 Z" class="header-accent" />
+    <text x="12" y="22" class="header-text">Event (Core Hub)</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="150" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="field-text">title (TEXT-IDX)</text><text x="150" y="77" class="type-text">String</text>
+    <text x="12" y="99" class="field-text">description</text><text x="150" y="99" class="type-text">String</text>
+    <text x="12" y="121" class="field-text">category [enum]</text><text x="150" y="121" class="type-text">String</text>
+    <text x="12" y="143" class="field-text">startDate (IDX)</text><text x="150" y="143" class="type-text">Date</text>
+    <text x="12" y="165" class="field-text">endDate</text><text x="150" y="165" class="type-text">Date</text>
+    <text x="12" y="187" class="fk-text">FK  venue</text><text x="150" y="187" class="type-text">ref:Venue</text>
+    <text x="12" y="209" class="fk-text">FK  organizer</text><text x="150" y="209" class="type-text">ref:User</text>
+    <text x="12" y="231" class="field-text">status [enum]</text><text x="150" y="231" class="type-text">String</text>
+  </g>
+
+  <!-- 4. TICKET TYPE ENTITY -->
+  <g transform="translate(340, 410)">
+    <rect width="250" height="200" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 247 0 Q 250 0 250 3 L 250 32 L 0 32 Z" class="header-bg" />
+    <text x="12" y="22" class="header-text">TicketType</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="150" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="fk-text">FK  event (UQ-CMP)</text><text x="150" y="77" class="type-text">ref:Event</text>
+    <text x="12" y="99" class="field-text">name (UQ-CMP)</text><text x="150" y="99" class="type-text">String</text>
+    <text x="12" y="121" class="field-text">price</text><text x="150" y="121" class="type-text">Number</text>
+    <text x="12" y="143" class="field-text">quantityTotal</text><text x="150" y="143" class="type-text">Number</text>
+    <text x="12" y="165" class="field-text">quantitySold</text><text x="150" y="165" class="type-text">Number (Atomic)</text>
+    <text x="12" y="187" class="field-text">saleStart / saleEnd</text><text x="150" y="187" class="type-text">Date</text>
+  </g>
+
+  <!-- 5. REGISTRATION ENTITY -->
+  <g transform="translate(680, 100)">
+    <rect width="250" height="230" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 247 0 Q 250 0 250 3 L 250 32 L 0 32 Z" class="header-accent" />
+    <text x="12" y="22" class="header-text">Registration (Stub)</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="150" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="fk-text">FK  user</text><text x="150" y="77" class="type-text">ref:User</text>
+    <text x="12" y="99" class="fk-text">FK  event</text><text x="150" y="99" class="type-text">ref:Event</text>
+    <text x="12" y="121" class="fk-text">FK  ticketType</text><text x="150" y="121" class="type-text">ref:TicketType</text>
+    <text x="12" y="143" class="field-text">quantity</text><text x="150" y="143" class="type-text">Number</text>
+    <text x="12" y="165" class="field-text">status [enum]</text><text x="150" y="165" class="type-text">confirmed/cancel</text>
+    <text x="12" y="187" class="field-text">attendance [enum]</text><text x="150" y="187" class="type-text">checked_in/pend</text>
+    <text x="12" y="209" class="field-text">registrationCode (UQ)</text><text x="150" y="209" class="type-text">REG-XXXXXX</text>
+  </g>
+
+  <!-- 6. PAYMENT ENTITY -->
+  <g transform="translate(680, 410)">
+    <rect width="250" height="180" rx="3" class="entity-box" />
+    <path d="M 0 3 Q 0 0 3 0 L 247 0 Q 250 0 250 3 L 250 32 L 0 32 Z" class="header-bg" />
+    <text x="12" y="22" class="header-text">Payment</text>
+    
+    <text x="12" y="55" class="pk-text">PK  _id</text><text x="150" y="55" class="type-text">ObjectId</text>
+    <text x="12" y="77" class="fk-text">FK  registration</text><text x="150" y="77" class="type-text">ref:Registration</text>
+    <text x="12" y="99" class="field-text">amount</text><text x="150" y="99" class="type-text">Number</text>
+    <text x="12" y="121" class="field-text">method [enum]</text><text x="150" y="121" class="type-text">card/upi/cash</text>
+    <text x="12" y="143" class="field-text">status [enum]</text><text x="150" y="143" class="type-text">paid/refunded</text>
+    <text x="12" y="165" class="field-text">reference (UQ)</text><text x="150" y="165" class="type-text">PAY-XXXX-XXXX</text>
+  </g>
+
+  <!-- Relational Lines -->
+  <!-- User to Event -->
+  <line x1="260" y1="200" x2="340" y2="200" class="connector-solid" />
+  <circle cx="340" cy="200" r="3" fill="#17140F" />
+
+  <!-- Venue to Event -->
+  <path d="M 260 450 L 300 450 L 300 280 L 340 280" class="connector-solid" />
+  <circle cx="340" cy="280" r="3" fill="#17140F" />
+
+  <!-- Event to TicketType -->
+  <line x1="465" y1="340" x2="465" y2="410" class="connector-solid" />
+  <circle cx="465" cy="410" r="3" fill="#17140F" />
+
+  <!-- Event to Registration -->
+  <line x1="590" y1="200" x2="680" y2="200" class="connector-solid" />
+  <circle cx="680" cy="200" r="3" fill="#17140F" />
+
+  <!-- TicketType to Registration -->
+  <path d="M 590 510 L 630 510 L 630 250 L 680 250" class="connector" />
+  <circle cx="680" cy="250" r="3" fill="#6B655A" />
+
+  <!-- Registration to Payment -->
+  <line x1="805" y1="330" x2="805" y2="410" class="connector-solid" />
+  <circle cx="805" cy="410" r="3" fill="#17140F" />
+</svg>
+

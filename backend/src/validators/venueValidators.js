@@ -49,3 +49,4 @@ module.exports = {
   createVenueValidator,
   updateVenueValidator,
 };
+

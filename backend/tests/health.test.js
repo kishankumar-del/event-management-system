@@ -48,3 +48,4 @@ test('GET /api/unknown-endpoint returns 404 with AppError format', async (t) => 
     await new Promise((resolve) => server.close(resolve));
   }
 });
+

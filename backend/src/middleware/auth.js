@@ -45,3 +45,4 @@ const auth = catchAsync(async (req, res, next) => {
 });
 
 module.exports = auth;
+

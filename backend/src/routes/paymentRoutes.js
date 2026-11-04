@@ -16,3 +16,4 @@ router.route('/:id')
 router.patch('/:id/refund', authorizeRoles('organizer', 'admin'), paymentController.refundPayment);
 
 module.exports = router;
+

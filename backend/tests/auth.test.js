@@ -115,3 +115,4 @@ test('RBAC Middleware authorizeRoles: rejects unauthorized role with 403 Forbidd
   assert.equal(capturedError.statusCode, 403);
   assert.ok(capturedError.message.includes('Access forbidden'));
 });
+

@@ -64,3 +64,4 @@ ticketTypeSchema.set('toObject', { virtuals: true });
 const TicketType = mongoose.model('TicketType', ticketTypeSchema);
 
 module.exports = TicketType;
+

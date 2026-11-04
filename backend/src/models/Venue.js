@@ -42,3 +42,4 @@ venueSchema.index({ city: 1, name: 1 });
 const Venue = mongoose.model('Venue', venueSchema);
 
 module.exports = Venue;
+

@@ -87,3 +87,4 @@ eventSchema.index({ status: 1, startDate: 1 });
 const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
+

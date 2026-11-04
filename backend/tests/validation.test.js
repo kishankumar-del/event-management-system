@@ -87,3 +87,4 @@ test('Auth API Guard: GET /api/auth/me rejects unauthenticated request (401)', a
     await new Promise((resolve) => server.close(resolve));
   }
 });
+

@@ -62,3 +62,4 @@ paymentSchema.pre('validate', function (next) {
 const Payment = mongoose.model('Payment', paymentSchema);
 
 module.exports = Payment;
+

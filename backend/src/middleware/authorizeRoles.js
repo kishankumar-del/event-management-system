@@ -20,3 +20,4 @@ const authorizeRoles = (...roles) => {
 };
 
 module.exports = authorizeRoles;
+
