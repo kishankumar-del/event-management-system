@@ -4,26 +4,35 @@ const env = require('./env');
 // Set buffering timeout to 3s to avoid freezing requests when database is unreachable
 mongoose.set('bufferTimeoutMS', 3000);
 
-const connectDB = async () => {
+let isConnecting = false;
+
+const connectDB = async (retryCount = 0) => {
+  if (isConnecting || mongoose.connection.readyState === 1) return;
+  isConnecting = true;
+
   try {
     const conn = await mongoose.connect(env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000,
     });
 
     console.log(`[MongoDB] Connected to database: ${conn.connection.name} @ ${conn.connection.host}`);
+    isConnecting = false;
     return conn;
   } catch (error) {
-    console.error(`[MongoDB] Initial connection error: ${error.message}`);
-    // If during server bootstrap, log error. Do not exit if in test environment.
+    isConnecting = false;
+    console.error(`[MongoDB] Connection error: ${error.message}`);
     if (env.NODE_ENV !== 'test') {
-      console.warn('[MongoDB] Running without active database connection or waiting for retry.');
+      console.warn(`[MongoDB] Connection failed. Retrying connection in 5s (attempt ${retryCount + 1})...`);
+      setTimeout(() => connectDB(retryCount + 1), 5000);
     }
-    throw error;
   }
 };
 
 mongoose.connection.on('disconnected', () => {
-  console.warn('[MongoDB] Connection disconnected.');
+  console.warn('[MongoDB] Connection disconnected. Scheduling reconnect...');
+  if (env.NODE_ENV !== 'test') {
+    setTimeout(() => connectDB(), 3000);
+  }
 });
 
 mongoose.connection.on('error', (err) => {
