@@ -75,21 +75,21 @@ export function PublicLayout() {
               <div className="user-profile-menu">
                 <span className="user-name font-mono">{user?.name}</span>
                 <span className="user-role-tag">{user?.role}</span>
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <button type="button" className="header-btn header-btn-signout" onClick={handleLogout}>
                   Sign Out
-                </Button>
+                </button>
               </div>
             ) : (
               <div className="auth-buttons">
-                <Link to="/login">
-                  <Button variant="ghost" size="sm">
+                <Link to="/login" style={{ textDecoration: 'none' }}>
+                  <button type="button" className="header-btn header-btn-signin">
                     Sign In
-                  </Button>
+                  </button>
                 </Link>
-                <Link to="/register">
-                  <Button variant="primary" size="sm">
+                <Link to="/register" style={{ textDecoration: 'none' }}>
+                  <button type="button" className="header-btn header-btn-register">
                     Register
-                  </Button>
+                  </button>
                 </Link>
               </div>
             )}
@@ -244,6 +244,52 @@ export function PublicLayout() {
           align-items: center;
           gap: var(--space-3);
         }
+        .header-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-ui);
+          font-size: 0.8125rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          padding: 0 var(--space-4);
+          height: 36px;
+          border-radius: var(--radius-sm);
+          text-decoration: none;
+          cursor: pointer;
+          transition: all var(--transition-fast);
+          white-space: nowrap;
+        }
+        .header-btn-signin {
+          background-color: transparent;
+          color: var(--color-header-text);
+          border: 1.5px solid var(--color-header-text);
+        }
+        .header-btn-signin:hover {
+          background-color: var(--color-header-text);
+          color: var(--color-header-bg);
+          border-color: var(--color-header-text);
+        }
+        .header-btn-register {
+          background-color: var(--color-accent);
+          color: #FFFFFF;
+          border: 1.5px solid var(--color-accent);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        .header-btn-register:hover {
+          background-color: var(--color-accent-hover, #298E89);
+          border-color: var(--color-accent-hover, #298E89);
+        }
+        .header-btn-signout {
+          background-color: rgba(229, 239, 193, 0.12);
+          color: var(--color-header-text);
+          border: 1.5px solid var(--color-header-text);
+        }
+        .header-btn-signout:hover {
+          background-color: var(--color-danger);
+          border-color: var(--color-danger);
+          color: #FFFFFF;
+        }
         .auth-buttons {
           display: flex;
           align-items: center;
@@ -272,11 +318,13 @@ export function PublicLayout() {
         }
         .mobile-toggle {
           display: none;
-          background: none;
-          border: 1px solid var(--color-rule);
+          background: rgba(229, 239, 193, 0.1);
+          border: 1.5px solid var(--color-header-text);
           font-size: 1.25rem;
-          padding: 4px 8px;
-          color: var(--color-ink);
+          padding: 4px 10px;
+          color: var(--color-header-text);
+          border-radius: var(--radius-sm);
+          cursor: pointer;
         }
         .mobile-nav-panel {
           display: flex;

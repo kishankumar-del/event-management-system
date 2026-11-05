@@ -37,9 +37,9 @@ export function DashboardLayout() {
               <span className="user-name">{user?.name}</span>
               <span className="role-pill font-mono">{role}</span>
             </div>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
+            <button type="button" className="header-btn header-btn-signout" onClick={handleLogout}>
               Sign Out
-            </Button>
+            </button>
           </div>
         </div>
 
@@ -197,6 +197,32 @@ export function DashboardLayout() {
           display: flex;
           align-items: center;
           gap: var(--space-4);
+        }
+        .header-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-ui);
+          font-size: 0.8125rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          padding: 0 var(--space-4);
+          height: 36px;
+          border-radius: var(--radius-sm);
+          text-decoration: none;
+          cursor: pointer;
+          transition: all var(--transition-fast);
+          white-space: nowrap;
+        }
+        .header-btn-signout {
+          background-color: rgba(229, 239, 193, 0.12);
+          color: var(--color-header-text);
+          border: 1.5px solid var(--color-header-text);
+        }
+        .header-btn-signout:hover {
+          background-color: var(--color-danger);
+          border-color: var(--color-danger);
+          color: #FFFFFF;
         }
         .public-portal-link {
           font-size: 0.8125rem;
