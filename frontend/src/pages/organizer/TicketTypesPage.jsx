@@ -178,7 +178,7 @@ export function TicketTypesPage() {
               />
             </Field>
 
-            <Field label="Price (USD)" htmlFor="t-price" required>
+            <Field label="Price (INR ₹)" htmlFor="t-price" required>
               <Input
                 id="t-price"
                 type="number"
@@ -276,7 +276,7 @@ export function TicketTypesPage() {
                     {t.name}
                   </td>
                   <td data-label="Price" className="tabular-nums font-mono">
-                    ${t.price.toFixed(2)}
+                    ₹{t.price.toFixed(2)}
                   </td>
                   <td data-label="Sold / Total" className="tabular-nums font-mono">
                     {t.quantitySold} / {t.quantityTotal}

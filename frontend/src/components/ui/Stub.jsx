@@ -97,7 +97,7 @@ export function Stub({
           <div>
             <span className="stub-label">TOTAL</span>
             <span className="stub-val tabular-nums font-mono">
-              ${(price * quantity).toFixed(2)}
+              ₹{(price * quantity).toFixed(2)}
             </span>
           </div>
         </div>

@@ -81,7 +81,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[0]._id,
         name: 'General Admission',
-        price: 55,
+        price: 499,
         quantityTotal: 300,
         quantitySold: 0,
         saleStart: pastDate,
@@ -90,7 +90,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[0]._id,
         name: 'VIP Balcony Tier',
-        price: 120,
+        price: 1499,
         quantityTotal: 50,
         quantitySold: 0,
         saleStart: pastDate,
@@ -100,7 +100,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[1]._id,
         name: 'Early Bird Pass',
-        price: 199,
+        price: 1999,
         quantityTotal: 150,
         quantitySold: 0,
         saleStart: pastDate,
@@ -109,7 +109,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[1]._id,
         name: 'Standard Conference Pass',
-        price: 349,
+        price: 3499,
         quantityTotal: 500,
         quantitySold: 0,
         saleStart: pastDate,
@@ -119,7 +119,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[2]._id,
         name: 'Workshop Seat',
-        price: 85,
+        price: 899,
         quantityTotal: 40,
         quantitySold: 0,
         saleStart: pastDate,
@@ -129,7 +129,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[3]._id,
         name: 'Delegate Admission',
-        price: 45,
+        price: 499,
         quantityTotal: 200,
         quantitySold: 0,
         saleStart: pastDate,
@@ -149,7 +149,7 @@ const seedDatabase = async () => {
       {
         event: eventDocs[5]._id,
         name: 'Exhibition Entry',
-        price: 25,
+        price: 250,
         quantityTotal: 250,
         quantitySold: 0,
         saleStart: new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
@@ -167,79 +167,79 @@ const seedDatabase = async () => {
       {
         user: attendees[0]._id,
         event: eventDocs[0]._id,
-        ticketType: ticketTypeDocs[0]._id, // General Admission ($55)
+        ticketType: ticketTypeDocs[0]._id, // General Admission (₹499)
         quantity: 2,
         status: 'confirmed',
         attendance: 'checked_in',
         checkedInAt: new Date(),
         paymentMethod: 'card',
-        amount: 110,
+        amount: 998,
       },
       {
         user: attendees[1]._id,
         event: eventDocs[0]._id,
-        ticketType: ticketTypeDocs[1]._id, // VIP Balcony ($120)
+        ticketType: ticketTypeDocs[1]._id, // VIP Balcony (₹1499)
         quantity: 1,
         status: 'confirmed',
         attendance: 'pending',
         checkedInAt: null,
         paymentMethod: 'upi',
-        amount: 120,
+        amount: 1499,
       },
       {
         user: attendees[2]._id,
         event: eventDocs[1]._id,
-        ticketType: ticketTypeDocs[2]._id, // Early Bird ($199)
+        ticketType: ticketTypeDocs[2]._id, // Early Bird (₹1999)
         quantity: 1,
         status: 'confirmed',
         attendance: 'pending',
         checkedInAt: null,
         paymentMethod: 'card',
-        amount: 199,
+        amount: 1999,
       },
       {
         user: attendees[3]._id,
         event: eventDocs[1]._id,
-        ticketType: ticketTypeDocs[3]._id, // Standard Pass ($349)
+        ticketType: ticketTypeDocs[3]._id, // Standard Pass (₹3499)
         quantity: 1,
         status: 'confirmed',
         attendance: 'checked_in',
         checkedInAt: new Date(),
         paymentMethod: 'card',
-        amount: 349,
+        amount: 3499,
       },
       {
         user: attendees[4]._id,
         event: eventDocs[2]._id,
-        ticketType: ticketTypeDocs[4]._id, // Workshop ($85)
+        ticketType: ticketTypeDocs[4]._id, // Workshop (₹899)
         quantity: 1,
         status: 'confirmed',
         attendance: 'pending',
         checkedInAt: null,
         paymentMethod: 'cash',
-        amount: 85,
+        amount: 899,
       },
       {
         user: attendees[0]._id,
         event: eventDocs[3]._id,
-        ticketType: ticketTypeDocs[5]._id, // AI Seminar ($45)
+        ticketType: ticketTypeDocs[5]._id, // AI Seminar (₹499)
         quantity: 2,
         status: 'confirmed',
         attendance: 'pending',
         checkedInAt: null,
         paymentMethod: 'upi',
-        amount: 90,
+        amount: 998,
       },
       {
         user: attendees[1]._id,
         event: eventDocs[5]._id,
-        ticketType: ticketTypeDocs[7]._id, // Past exhibition ($25)
+        ticketType: ticketTypeDocs[7]._id, // Past exhibition (₹250)
         quantity: 2,
         status: 'confirmed',
         attendance: 'checked_in',
         checkedInAt: new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000),
         paymentMethod: 'card',
-        amount: 50,
+        amount: 500,
       },
     ];
 

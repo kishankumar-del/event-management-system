@@ -56,7 +56,7 @@ export function AdminReportsPage() {
         <div className="kpi-card">
           <span className="kpi-label font-mono">TOTAL PLATFORM REVENUE</span>
           <span className="kpi-value tabular-nums font-mono" style={{ color: 'var(--color-accent)' }}>
-            ${kpis.totalRevenue?.toFixed(2)}
+            ₹{kpis.totalRevenue?.toFixed(2)}
           </span>
         </div>
         <div className="kpi-card">
@@ -86,7 +86,7 @@ export function AdminReportsPage() {
                 <div className="bar-entry-track">
                   <div className="bar-entry-fill" style={{ width: `${widthPct}%` }}>
                     <span className="font-mono tabular-nums" style={{ color: 'white', fontSize: '0.75rem', fontWeight: 600 }}>
-                      ${ev.totalRevenue.toFixed(2)}
+                      ₹{ev.totalRevenue.toFixed(2)}
                     </span>
                   </div>
                 </div>

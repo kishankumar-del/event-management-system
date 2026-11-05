@@ -202,7 +202,7 @@ export function CheckoutPage() {
                   const remaining = Math.max(0, tier.quantityTotal - tier.quantitySold);
                   return (
                     <option key={tier._id} value={tier._id} disabled={remaining <= 0}>
-                      {tier.name} — ${tier.price.toFixed(2)} ({remaining} available)
+                      {tier.name} — ₹{tier.price.toFixed(2)} ({remaining} available)
                     </option>
                   );
                 })}
@@ -245,7 +245,7 @@ export function CheckoutPage() {
 
             <div style={{ marginTop: 'var(--space-6)' }}>
               <Button type="submit" variant="primary" loading={submitting} style={{ width: '100%' }}>
-                Confirm Registration & Issue Stub (${totalPrice.toFixed(2)}) →
+                Confirm Registration & Issue Stub (₹{totalPrice.toFixed(2)}) →
               </Button>
             </div>
           </form>
@@ -267,7 +267,7 @@ export function CheckoutPage() {
               </div>
               <div className="summary-line">
                 <span>Unit Price</span>
-                <span className="font-mono tabular-nums">${unitPrice.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">₹{unitPrice.toFixed(2)}</span>
               </div>
               <div className="summary-line">
                 <span>Quantity</span>
@@ -276,7 +276,7 @@ export function CheckoutPage() {
               <hr style={{ margin: 'var(--space-3) 0' }} />
               <div className="summary-line total-line">
                 <span style={{ fontWeight: 700 }}>Total Due</span>
-                <span className="font-mono tabular-nums total-amount">${totalPrice.toFixed(2)}</span>
+                <span className="font-mono tabular-nums total-amount">₹{totalPrice.toFixed(2)}</span>
               </div>
             </div>
 

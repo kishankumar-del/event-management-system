@@ -75,7 +75,7 @@ export function ReportsPage() {
         <div className="report-kpi-item">
           <span className="kpi-label font-mono">AGGREGATE REVENUE</span>
           <span className="kpi-value tabular-nums font-mono report-accent">
-            ${(kpis.totalRevenue || 0).toFixed(2)}
+            ₹{(kpis.totalRevenue || 0).toFixed(2)}
           </span>
           <span className="text-muted" style={{ fontSize: '0.75rem' }}>From paid settlements</span>
         </div>
@@ -101,7 +101,7 @@ export function ReportsPage() {
 
       {/* Chart 1: Revenue by Event (Pure SVG & CSS Horizontal Bars) */}
       <section className="report-section">
-        <h2 className="section-title">1. Revenue Yield by Production (USD)</h2>
+        <h2 className="section-title">1. Revenue Yield by Production (INR ₹)</h2>
         <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: 'var(--space-4)' }}>
           Calculated by grouping confirmed registration payments by event ID.
         </p>
@@ -132,7 +132,7 @@ export function ReportsPage() {
                       aria-valuemax={maxRevenue}
                     >
                       <span className="bar-inner-text tabular-nums font-mono">
-                        ${item.totalRevenue.toFixed(2)}
+                        ₹{item.totalRevenue.toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export function ReportsPage() {
             <div key={idx} className="tier-progress-card">
               <div className="tier-card-head">
                 <span className="tier-title">{t.tierName}</span>
-                <span className="tabular-nums font-mono text-muted">${t.price.toFixed(2)}</span>
+                <span className="tabular-nums font-mono text-muted">₹{t.price.toFixed(2)}</span>
               </div>
               <div className="tier-card-event text-muted">{t.eventTitle}</div>
 

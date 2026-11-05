@@ -69,7 +69,7 @@ export function HomePage() {
           eventDate={new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)}
           ticketTier="VIP Balcony Tier"
           quantity={2}
-          price={120}
+          price={1499}
           attendeeName="Eleanor Vance"
           status="confirmed"
           attendance="checked_in"

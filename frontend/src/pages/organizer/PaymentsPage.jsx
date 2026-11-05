@@ -150,7 +150,7 @@ export function PaymentsPage() {
                       {p.method}
                     </td>
                     <td data-label="Amount" className="tabular-nums font-mono" style={{ fontWeight: 600 }}>
-                      ${p.amount?.toFixed(2)}
+                      ₹{p.amount?.toFixed(2)}
                     </td>
                     <td data-label="Status">
                       <Badge status={p.status} />

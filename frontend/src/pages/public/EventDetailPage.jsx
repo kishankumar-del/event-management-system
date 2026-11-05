@@ -153,7 +153,7 @@ export function EventDetailPage() {
                       {tier.name}
                     </td>
                     <td data-label="Price" className="tabular-nums font-mono" style={{ fontWeight: 600 }}>
-                      {tier.price === 0 ? 'FREE' : `$${tier.price.toFixed(2)}`}
+                      {tier.price === 0 ? 'FREE' : `₹${tier.price.toFixed(2)}`}
                     </td>
                     <td data-label="Availability" className="tabular-nums font-mono">
                       {remaining} of {tier.quantityTotal} left

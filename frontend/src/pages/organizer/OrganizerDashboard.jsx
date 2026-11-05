@@ -78,7 +78,7 @@ export function OrganizerDashboard() {
         <div className="kpi-card">
           <span className="kpi-label font-mono">TOTAL REVENUE YIELD</span>
           <span className="kpi-value tabular-nums font-mono kpi-accent">
-            ${(kpis.totalRevenue || 0).toFixed(2)}
+            ₹{(kpis.totalRevenue || 0).toFixed(2)}
           </span>
           <span className="kpi-sub text-muted">Settled payments</span>
         </div>

@@ -79,7 +79,7 @@ export function AdminDashboard() {
         <div className="admin-kpi-card">
           <span className="kpi-label font-mono">GROSS SETTLEMENT VOLUME</span>
           <span className="kpi-value tabular-nums font-mono admin-accent">
-            ${kpis.totalRevenue?.toFixed(2)}
+            ₹{kpis.totalRevenue?.toFixed(2)}
           </span>
           <span className="text-muted" style={{ fontSize: '0.75rem' }}>Across all payment gateways</span>
         </div>
@@ -101,7 +101,7 @@ export function AdminDashboard() {
               <span className="font-mono text-muted">{t.category}</span>
               <span className="tabular-nums font-mono">{t.ticketsSold}</span>
               <span className="tabular-nums font-mono" style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
-                ${t.totalRevenue.toFixed(2)}
+                ₹{t.totalRevenue.toFixed(2)}
               </span>
             </div>
           ))}
