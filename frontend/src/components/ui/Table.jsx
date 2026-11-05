@@ -40,7 +40,7 @@ export function Table({ children, className = '' }) {
           border-bottom: none;
         }
         .data-table tbody tr:hover {
-          background-color: #F8F3EB;
+          background-color: var(--color-surface-hover);
         }
 
         /* Mobile stacked responsive view */

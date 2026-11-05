@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const env = require('./env');
 
+// Set buffering timeout to 3s to avoid freezing requests when database is unreachable
+mongoose.set('bufferTimeoutMS', 3000);
+
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(env.MONGODB_URI, {

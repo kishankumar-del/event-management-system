@@ -223,7 +223,7 @@ export function Stub({
           width: 210px;
           flex-shrink: 0;
           padding: var(--space-5) var(--space-4);
-          background-color: #FAF6EE;
+          background-color: var(--color-surface-subtle);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -234,7 +234,7 @@ export function Stub({
           top: 0;
           left: 0;
           right: 0;
-          height: 3px;
+          height: 4px;
           background-color: var(--color-accent);
         }
         .stub-slip-header {

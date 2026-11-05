@@ -282,7 +282,7 @@ export function HomePage() {
           transition: background-color var(--transition-fast);
         }
         .event-row:hover {
-          background-color: #FAF6EE;
+          background-color: var(--color-surface-hover);
         }
         .event-row-date {
           display: flex;

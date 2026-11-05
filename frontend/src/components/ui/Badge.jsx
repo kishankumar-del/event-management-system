@@ -48,17 +48,17 @@ export function Badge({ status, label, variant, className = '' }) {
           white-space: nowrap;
         }
         .badge-success {
-          background-color: #EBF3ED;
+          background-color: var(--color-success-bg, #E3F5EB);
           color: var(--color-success);
           border: 1px solid var(--color-success);
         }
         .badge-pending {
-          background-color: #FEF7EC;
+          background-color: var(--color-pending-bg, #FEF6E6);
           color: var(--color-pending);
           border: 1px solid var(--color-pending);
         }
         .badge-danger {
-          background-color: #FDF0ED;
+          background-color: var(--color-danger-bg, #FBECEB);
           color: var(--color-danger);
           border: 1px solid var(--color-danger);
         }
@@ -68,9 +68,14 @@ export function Badge({ status, label, variant, className = '' }) {
           border: 1px solid var(--color-rule);
         }
         .badge-accent {
-          background-color: #FDF0ED;
+          background-color: var(--color-accent-subtle, #E2F4F3);
           color: var(--color-accent);
           border: 1px solid var(--color-accent);
+        }
+        .badge-mint {
+          background-color: rgba(162, 213, 171, 0.25);
+          color: #1A5436;
+          border: 1px solid var(--color-brand-mint, #A2D5AB);
         }
       `}</style>
     </span>

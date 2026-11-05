@@ -61,18 +61,19 @@ export function Button({
         /* Variants */
         .btn-primary {
           background-color: var(--color-accent);
-          color: var(--color-surface);
+          color: #ffffff;
+          font-weight: 600;
           border: 1px solid var(--color-accent);
         }
         .btn-primary:hover:not(:disabled) {
-          background-color: #b83214;
-          border-color: #b83214;
+          background-color: var(--color-accent-hover, #2C8F8A);
+          border-color: var(--color-accent-hover, #2C8F8A);
         }
 
         .btn-outline {
           background-color: transparent;
           color: var(--color-ink);
-          border: 1px solid var(--color-ink);
+          border: 1px solid var(--color-muted);
         }
         .btn-outline:hover:not(:disabled) {
           background-color: var(--color-surface);
@@ -86,17 +87,19 @@ export function Button({
           border: 1px solid transparent;
         }
         .btn-ghost:hover:not(:disabled) {
-          background-color: var(--color-surface);
+          background-color: var(--color-surface-hover);
           color: var(--color-ink);
         }
 
         .btn-danger {
           background-color: var(--color-danger);
-          color: var(--color-surface);
+          color: #ffffff;
+          font-weight: 600;
           border: 1px solid var(--color-danger);
         }
         .btn-danger:hover:not(:disabled) {
-          background-color: #831e15;
+          background-color: #9C2D20;
+          border-color: #9C2D20;
         }
 
         .btn:disabled {

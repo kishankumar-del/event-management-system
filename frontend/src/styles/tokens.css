@@ -1,14 +1,33 @@
 :root {
-  /* Box Office Color Palette - Strictly Enforced */
-  --color-paper: #F4EFE6;
-  --color-surface: #FBF8F2;
-  --color-ink: #17140F;
-  --color-muted: #6B655A;
-  --color-rule: #D8D0C0;
-  --color-accent: #D9411E;
-  --color-success: #2F5D3A;
-  --color-pending: #B7791F;
-  --color-danger: #A3261A;
+  /* "Turtle" Color Palette - Derived from User Palette */
+  --color-turtle-light: #E5EFC1;  /* Swatch 1: Pale Celery Cream */
+  --color-turtle-mint: #A2D5AB;   /* Swatch 2: Fresh Pastel Mint */
+  --color-turtle-teal: #39AEA9;   /* Swatch 3: Vibrant Ocean Teal */
+  --color-turtle-slate: #557B83;  /* Swatch 4: Deep Slate Teal */
+
+  /* Semantic UI Tokens */
+  --color-paper: #F3F7EB;         /* Fresh canvas with light celery tint */
+  --color-surface: #FFFFFF;       /* Crisp card and form surfaces */
+  --color-surface-subtle: #E5EFC1;/* Swatch 1: Soft celery highlight (ticket slips, header bars) */
+  --color-surface-hover: #EBF3DC; /* Row and item hover highlight */
+  --color-ink: #132629;           /* Deep ocean slate for high-contrast legible text */
+  --color-muted: #557B83;         /* Swatch 4: Slate teal for subtitles and metadata */
+  --color-rule: #C5DFCC;          /* Soft mint hairline rule */
+
+  /* Accents & Brand Actions */
+  --color-accent: #39AEA9;        /* Swatch 3: Primary ocean teal */
+  --color-accent-hover: #2C8F8A;  /* Deepened ocean teal for hover states */
+  --color-accent-subtle: #E2F4F3; /* Soft teal background tint for badges & alerts */
+  --color-brand-primary: #557B83; /* Swatch 4: Grounded slate teal */
+  --color-brand-mint: #A2D5AB;    /* Swatch 2: Fresh mint highlight */
+
+  /* Status Colors (Harmonized with Turtle tone) */
+  --color-success: #257049;
+  --color-success-bg: #E3F5EB;
+  --color-pending: #B27318;
+  --color-pending-bg: #FEF6E6;
+  --color-danger: #B83A2C;
+  --color-danger-bg: #FBECEB;
 
   /* Typography */
   --font-heading: 'Newsreader', Georgia, serif;
@@ -28,8 +47,8 @@
   --space-16: 64px;
 
   /* Geometry & Borders */
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  --radius-sm: 3px;
+  --radius-md: 6px;
   --border-hairline: 1px solid var(--color-rule);
   --border-ink: 1px solid var(--color-ink);
 

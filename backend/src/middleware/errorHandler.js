@@ -39,6 +39,13 @@ const errorHandler = (err, req, res, next) => {
   if (err.code === 11000) error = handleDuplicateFieldsDB(err);
   // Mongoose validation error
   if (err.name === 'ValidationError') error = handleValidationErrorDB(err);
+  // Mongoose buffering timeout (disconnected database)
+  if (err.name === 'MongooseError' && err.message && err.message.includes('buffering timed out')) {
+    error = new AppError(
+      'Database connection error: Could not reach MongoDB. Please set your MONGODB_URI in backend/.env with your MongoDB Atlas connection string and ensure Network Access (0.0.0.0/0) is enabled in Atlas.',
+      503
+    );
+  }
   // JWT errors
   if (err.name === 'JsonWebTokenError') error = handleJWTError();
   if (err.name === 'TokenExpiredError') error = handleJWTExpiredError();
