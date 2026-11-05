@@ -166,11 +166,12 @@ export function PublicLayout() {
           background-color: var(--color-paper);
         }
         .site-header {
-          border-bottom: var(--border-hairline);
-          background-color: var(--color-paper);
+          border-bottom: 2px solid var(--color-accent);
+          background-color: var(--color-header-bg);
           position: sticky;
           top: 0;
           z-index: 100;
+          box-shadow: 0 2px 10px rgba(20, 37, 40, 0.15);
         }
         .header-inner {
           max-width: var(--container-max);
@@ -187,19 +188,24 @@ export function PublicLayout() {
           align-items: baseline;
           gap: var(--space-3);
           text-decoration: none;
-          color: var(--color-ink);
+          color: #FFFFFF;
         }
         .wordmark-primary {
           font-family: var(--font-heading);
           font-weight: 700;
           font-size: 1.25rem;
           letter-spacing: -0.02em;
+          color: #FFFFFF;
         }
         .wordmark-badge {
           font-family: var(--font-mono);
           font-size: 0.6875rem;
           font-weight: 600;
-          color: var(--color-muted);
+          color: var(--color-header-sub);
+          background-color: rgba(0, 0, 0, 0.25);
+          border: 1px solid var(--color-header-sub);
+          padding: 1px 6px;
+          border-radius: var(--radius-sm);
           letter-spacing: 0.08em;
         }
         .desktop-nav {
@@ -211,17 +217,18 @@ export function PublicLayout() {
           font-family: var(--font-ui);
           font-size: 0.875rem;
           font-weight: 500;
-          color: var(--color-muted);
+          color: var(--color-header-text);
           text-decoration: none;
           position: relative;
           padding: var(--space-2) 0;
           transition: color var(--transition-fast);
         }
         .nav-link:hover {
-          color: var(--color-ink);
+          color: #FFFFFF;
         }
         .nav-link-active {
-          color: var(--color-ink);
+          color: #FFFFFF;
+          font-weight: 600;
         }
         .nav-link-active::after {
           content: '';
@@ -229,7 +236,7 @@ export function PublicLayout() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 2px;
+          height: 3px;
           background-color: var(--color-accent);
         }
         .header-actions {
@@ -250,13 +257,16 @@ export function PublicLayout() {
         .user-name {
           font-size: 0.8125rem;
           font-weight: 500;
+          color: #FFFFFF;
         }
         .user-role-tag {
           font-family: var(--font-mono);
           font-size: 0.6875rem;
           text-transform: uppercase;
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-rule);
+          background-color: var(--color-header-sub);
+          color: var(--color-ink);
+          font-weight: 700;
+          border: 1px solid var(--color-header-sub);
           padding: 2px 6px;
           border-radius: var(--radius-sm);
         }
@@ -289,8 +299,9 @@ export function PublicLayout() {
           padding: var(--space-8) var(--space-6);
         }
         .site-footer {
-          border-top: var(--border-hairline);
-          background-color: var(--color-paper);
+          border-top: 3px solid var(--color-accent);
+          background-color: var(--color-header-bg);
+          color: var(--color-header-text);
           padding: var(--space-8) var(--space-6);
           margin-top: auto;
         }
@@ -307,12 +318,15 @@ export function PublicLayout() {
           max-width: 480px;
           margin-top: var(--space-2);
           line-height: 1.5;
+          color: var(--color-header-text);
+          opacity: 0.9;
         }
         .meta-col {
           display: flex;
           flex-direction: column;
           gap: var(--space-1);
           font-size: 0.75rem;
+          color: var(--color-header-sub);
           text-align: right;
         }
         @media (max-width: 768px) {

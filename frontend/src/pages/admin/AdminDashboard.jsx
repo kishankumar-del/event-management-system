@@ -171,6 +171,9 @@ export function AdminDashboard() {
         .admin-kpi-card {
           background-color: var(--color-surface);
           border: 1px solid var(--color-rule);
+          border-top: 4px solid var(--color-accent);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.08);
           padding: var(--space-5);
           display: flex;
           flex-direction: column;
@@ -181,6 +184,8 @@ export function AdminDashboard() {
         .admin-section {
           background-color: var(--color-surface);
           border: 1px solid var(--color-rule);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.08);
           padding: var(--space-6);
         }
         .admin-top-table {

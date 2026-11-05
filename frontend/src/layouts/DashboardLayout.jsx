@@ -160,11 +160,12 @@ export function DashboardLayout() {
           background-color: var(--color-paper);
         }
         .dash-header {
-          background-color: var(--color-surface);
-          border-bottom: var(--border-hairline);
+          background-color: var(--color-header-bg);
+          border-bottom: 2px solid var(--color-accent);
           position: sticky;
           top: 0;
           z-index: 100;
+          box-shadow: 0 2px 10px rgba(20, 37, 40, 0.15);
         }
         .dash-header-inner {
           max-width: var(--container-max);
@@ -173,7 +174,7 @@ export function DashboardLayout() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid var(--color-rule);
+          border-bottom: 1px solid rgba(162, 213, 171, 0.3);
         }
         .dash-brand {
           display: flex;
@@ -182,15 +183,15 @@ export function DashboardLayout() {
         }
         .brand-link {
           text-decoration: none;
-          color: var(--color-ink);
+          color: #FFFFFF;
         }
         .desk-indicator {
           font-size: 0.6875rem;
           font-weight: 700;
           letter-spacing: 0.1em;
           padding: 2px 8px;
-          border-left: 2px solid var(--color-accent);
-          color: var(--color-muted);
+          border-left: 3px solid var(--color-accent);
+          color: var(--color-header-sub);
         }
         .dash-user-actions {
           display: flex;
@@ -199,11 +200,11 @@ export function DashboardLayout() {
         }
         .public-portal-link {
           font-size: 0.8125rem;
-          color: var(--color-muted);
+          color: var(--color-header-text);
           text-decoration: none;
         }
         .public-portal-link:hover {
-          color: var(--color-ink);
+          color: #FFFFFF;
         }
         .user-info {
           display: flex;
@@ -213,13 +214,17 @@ export function DashboardLayout() {
         .user-name {
           font-size: 0.875rem;
           font-weight: 500;
+          color: #FFFFFF;
         }
         .role-pill {
           font-size: 0.6875rem;
           text-transform: uppercase;
-          background-color: var(--color-paper);
-          border: 1px solid var(--color-rule);
+          background-color: var(--color-header-sub);
+          color: var(--color-ink);
+          font-weight: 700;
+          border: 1px solid var(--color-header-sub);
           padding: 1px 6px;
+          border-radius: var(--radius-sm);
         }
         .dash-nav-strip {
           max-width: var(--container-max);
@@ -236,7 +241,7 @@ export function DashboardLayout() {
           font-family: var(--font-ui);
           font-size: 0.875rem;
           font-weight: 500;
-          color: var(--color-muted);
+          color: var(--color-header-text);
           text-decoration: none;
           padding: var(--space-3) 0;
           position: relative;
@@ -244,10 +249,10 @@ export function DashboardLayout() {
           transition: color var(--transition-fast);
         }
         .dash-link:hover {
-          color: var(--color-ink);
+          color: #FFFFFF;
         }
         .dash-link-active {
-          color: var(--color-ink);
+          color: #FFFFFF;
           font-weight: 600;
         }
         .dash-link-active::after {
@@ -256,7 +261,7 @@ export function DashboardLayout() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 2px;
+          height: 3px;
           background-color: var(--color-accent);
         }
         .dash-main {

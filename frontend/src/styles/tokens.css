@@ -1,33 +1,42 @@
 :root {
-  /* "Turtle" Color Palette - Derived from User Palette */
-  --color-turtle-light: #E5EFC1;  /* Swatch 1: Pale Celery Cream */
-  --color-turtle-mint: #A2D5AB;   /* Swatch 2: Fresh Pastel Mint */
-  --color-turtle-teal: #39AEA9;   /* Swatch 3: Vibrant Ocean Teal */
-  --color-turtle-slate: #557B83;  /* Swatch 4: Deep Slate Teal */
+  /* Exact "Turtle" 4-Color Swatches from Palette */
+  --color-turtle-1: #E5EFC1;  /* Swatch 1: Pale Celery Cream */
+  --color-turtle-2: #A2D5AB;  /* Swatch 2: Fresh Pastel Mint */
+  --color-turtle-3: #39AEA9;  /* Swatch 3: Vibrant Ocean Teal */
+  --color-turtle-4: #557B83;  /* Swatch 4: Deep Slate Teal */
 
-  /* Semantic UI Tokens */
-  --color-paper: #F3F7EB;         /* Fresh canvas with light celery tint */
-  --color-surface: #FFFFFF;       /* Crisp card and form surfaces */
-  --color-surface-subtle: #E5EFC1;/* Swatch 1: Soft celery highlight (ticket slips, header bars) */
-  --color-surface-hover: #EBF3DC; /* Row and item hover highlight */
-  --color-ink: #132629;           /* Deep ocean slate for high-contrast legible text */
-  --color-muted: #557B83;         /* Swatch 4: Slate teal for subtitles and metadata */
-  --color-rule: #C5DFCC;          /* Soft mint hairline rule */
+  /* Primary UI Canvas & Surfaces */
+  --color-paper: #E5EFC1;            /* Swatch 1: Dominant page canvas */
+  --color-surface: #FFFFFF;          /* High-contrast crisp white cards/panels */
+  --color-surface-subtle: #D8E5AE;   /* Slightly deeper celery for embedded boxes */
+  --color-surface-hover: #D7E8B3;    /* Celery hover state for rows & list items */
+  --color-surface-mint: #A2D5AB;     /* Swatch 2: Mint surface for badges and date chips */
 
-  /* Accents & Brand Actions */
-  --color-accent: #39AEA9;        /* Swatch 3: Primary ocean teal */
-  --color-accent-hover: #2C8F8A;  /* Deepened ocean teal for hover states */
-  --color-accent-subtle: #E2F4F3; /* Soft teal background tint for badges & alerts */
-  --color-brand-primary: #557B83; /* Swatch 4: Grounded slate teal */
-  --color-brand-mint: #A2D5AB;    /* Swatch 2: Fresh mint highlight */
+  /* Header & Dark Navigation Surfaces */
+  --color-header-bg: #557B83;        /* Swatch 4: Slate Teal for header & footer */
+  --color-header-text: #E5EFC1;      /* Swatch 1: Pale Celery for nav links & titles */
+  --color-header-sub: #A2D5AB;       /* Swatch 2: Fresh Mint for metadata and badges */
 
-  /* Status Colors (Harmonized with Turtle tone) */
-  --color-success: #257049;
-  --color-success-bg: #E3F5EB;
-  --color-pending: #B27318;
-  --color-pending-bg: #FEF6E6;
-  --color-danger: #B83A2C;
-  --color-danger-bg: #FBECEB;
+  /* Typography & Foreground */
+  --color-ink: #142528;              /* Deep ocean slate for WCAG AAA text contrast */
+  --color-muted: #557B83;            /* Swatch 4: Slate Teal for subtitles and meta */
+  --color-rule: #A2D5AB;             /* Swatch 2: Mint hairline borders */
+  --color-border-dark: #557B83;      /* Swatch 4: Slate Teal borders */
+
+  /* Actions & Highlights */
+  --color-accent: #39AEA9;           /* Swatch 3: Vibrant Ocean Teal CTA buttons & tabs */
+  --color-accent-hover: #298E89;     /* Deep teal on hover */
+  --color-accent-subtle: #DDF3F2;    /* Soft teal tint */
+  --color-brand-primary: #557B83;    /* Swatch 4: Slate Teal */
+  --color-brand-mint: #A2D5AB;       /* Swatch 2: Mint */
+
+  /* Status Colors (Harmonized with Turtle) */
+  --color-success: #206E47;
+  --color-success-bg: #D4ECD9;
+  --color-pending: #9C600B;
+  --color-pending-bg: #FBEFDC;
+  --color-danger: #A82E22;
+  --color-danger-bg: #F8DCDB;
 
   /* Typography */
   --font-heading: 'Newsreader', Georgia, serif;
@@ -47,8 +56,8 @@
   --space-16: 64px;
 
   /* Geometry & Borders */
-  --radius-sm: 3px;
-  --radius-md: 6px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --border-hairline: 1px solid var(--color-rule);
   --border-ink: 1px solid var(--color-ink);
 

@@ -182,6 +182,9 @@ export function OrganizerDashboard() {
         .kpi-card {
           background-color: var(--color-surface);
           border: 1px solid var(--color-rule);
+          border-top: 4px solid var(--color-accent);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.08);
           padding: var(--space-5);
           display: flex;
           flex-direction: column;
@@ -213,13 +216,17 @@ export function OrganizerDashboard() {
         .shortcut-card {
           background-color: var(--color-surface);
           border: 1px solid var(--color-rule);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.08);
           padding: var(--space-5);
           text-decoration: none;
           color: inherit;
-          transition: border-color var(--transition-fast);
+          transition: all var(--transition-fast);
         }
         .shortcut-card:hover {
           border-color: var(--color-accent);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(85, 123, 131, 0.12);
         }
         .shortcut-title {
           font-family: var(--font-heading);

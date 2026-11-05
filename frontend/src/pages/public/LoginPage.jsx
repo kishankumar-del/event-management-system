@@ -171,11 +171,13 @@ export function LoginPage() {
         .auth-card {
           position: relative;
           background-color: var(--color-surface);
-          border: 1px solid var(--color-rule);
+          border: 2px solid var(--color-rule);
+          border-top: 5px solid var(--color-accent);
           padding: var(--space-8) var(--space-8);
           max-width: 460px;
           width: 100%;
-          border-radius: var(--radius-sm);
+          border-radius: var(--radius-md);
+          box-shadow: 0 4px 16px rgba(85, 123, 131, 0.12);
         }
         .auth-card-header {
           margin-bottom: var(--space-6);

@@ -237,6 +237,8 @@ export function EventDetailPage() {
         .info-box {
           background-color: var(--color-surface);
           border: 1px solid var(--color-rule);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.08);
           padding: var(--space-4);
           display: flex;
           flex-direction: column;

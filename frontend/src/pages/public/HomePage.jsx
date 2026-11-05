@@ -233,13 +233,16 @@ export function HomePage() {
         /* Stub feature strip */
         .stub-feature-strip {
           margin-bottom: var(--space-8);
-          padding-bottom: var(--space-6);
-          border-bottom: var(--border-hairline);
+          padding: var(--space-6);
+          background-color: rgba(255, 255, 255, 0.7);
+          border: 1px solid var(--color-rule);
+          border-radius: var(--radius-md);
+          box-shadow: 0 2px 8px rgba(85, 123, 131, 0.08);
         }
         .stub-feature-meta {
           font-size: 0.75rem;
           letter-spacing: 0.08em;
-          margin-bottom: var(--space-3);
+          margin-bottom: var(--space-4);
         }
 
         /* Toolbar */
@@ -251,9 +254,10 @@ export function HomePage() {
           gap: var(--space-4);
           margin-bottom: var(--space-6);
           background-color: var(--color-surface);
-          border: 1px solid var(--color-rule);
-          padding: var(--space-3) var(--space-4);
-          border-radius: var(--radius-sm);
+          border: 2px solid var(--color-rule);
+          padding: var(--space-4);
+          border-radius: var(--radius-md);
+          box-shadow: 0 2px 8px rgba(85, 123, 131, 0.08);
         }
         .search-field {
           flex: 1;
@@ -272,27 +276,34 @@ export function HomePage() {
         .events-roster {
           display: flex;
           flex-direction: column;
+          gap: var(--space-4);
         }
         .event-row {
           display: flex;
           align-items: flex-start;
           gap: var(--space-6);
-          padding: var(--space-6) 0;
-          border-bottom: var(--border-hairline);
-          transition: background-color var(--transition-fast);
+          padding: var(--space-5) var(--space-6);
+          background-color: var(--color-surface);
+          border: 1px solid var(--color-rule);
+          border-radius: var(--radius-md);
+          box-shadow: 0 1px 4px rgba(85, 123, 131, 0.06);
+          transition: all var(--transition-fast);
         }
         .event-row:hover {
           background-color: var(--color-surface-hover);
+          border-color: var(--color-accent);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(85, 123, 131, 0.12);
         }
         .event-row-date {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          width: 64px;
+          width: 68px;
           padding: var(--space-2);
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-rule);
+          background-color: var(--color-surface-mint);
+          border: 1px solid var(--color-border-dark);
           border-radius: var(--radius-sm);
           flex-shrink: 0;
           text-align: center;
@@ -301,10 +312,11 @@ export function HomePage() {
           font-size: 0.6875rem;
           font-weight: 700;
           letter-spacing: 0.05em;
+          color: var(--color-border-dark);
         }
         .date-badge-day {
           font-size: 1.5rem;
-          font-weight: 700;
+          font-weight: 800;
           line-height: 1.1;
           color: var(--color-ink);
         }
