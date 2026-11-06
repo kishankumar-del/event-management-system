@@ -9,7 +9,7 @@ A comprehensive, production-grade MERN stack Event Management System engineered 
 - **Frontend URL (Netlify):** `https://event-box-office.netlify.app/`
 - **Backend API URL (Render):** `https://event-management-backend-o2tn.onrender.com`
 - **API Health Check:** `https://event-management-backend-o2tn.onrender.com/api/health`
-- **Demo Video:** `https://<DEMO_VIDEO_LINK>` *(Scene-by-scene script in docs/demo-script.md)*
+- **Demo Video:** [Watch 3-Minute Walkthrough on Loom](https://www.loom.com/share/8e6f1bd9bbba45bb8966cf7a6db80bfa)
 - **Postman Collection:** `docs/Event_Management_System.postman_collection.json`
 - **ER Diagram:** `docs/er-diagram.md` and visual SVG `docs/er-diagram.svg`
 - **Screenshots:** High-resolution captures per role in `docs/screenshots/`
