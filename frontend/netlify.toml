@@ -1,5 +1,4 @@
 [build]
-  base = "frontend"
   publish = "dist"
   command = "npm run build"
 
@@ -7,4 +6,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
