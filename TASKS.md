@@ -13,9 +13,9 @@
 | 2. Mongoose Design & Database | 10 | 10 / 10 | Verified Complete |
 | 3. Authentication & Security | 10 | 10 / 10 | Verified Complete |
 | 4. UI Design & Responsiveness | 5 | 5 / 5 | Verified Complete |
-| 5. Deployment & Production Setup | 5 | 4 / 5 | Configs Verified (Awaiting User Push) |
+| 5. Deployment & Production Setup | 5 | 5 / 5 | Verified Live on Render & Netlify |
 | 6. Git, Documentation & Submission Pack | 5 | 5 / 5 | Verified Complete |
-| **Total** | **50** | **49 / 50** | **Ready for Submission & Deployment** |
+| **Total** | **50** | **50 / 50** | **Ready for Final Submission** |
 
 ---
 
@@ -101,12 +101,12 @@
 
 | Status | Requirement | Scope & Constraints | Evidence / Verification Target |
 |:---:|---|---|---|
-| [ ] | Backend Render Deployment | Hosted on Render with build/start commands and health check | Render service URL (Awaiting User Push) |
-| [ ] | Frontend Netlify Deployment| Hosted on Netlify with SPA redirect rules | Netlify site URL (Awaiting User Push) |
+| [x] | Backend Render Deployment | Hosted on Render with build/start commands and health check | Live at `https://event-management-backend-o2tn.onrender.com` |
+| [x] | Frontend Netlify Deployment| Hosted on Netlify with SPA redirect rules | Live on Netlify |
 | [x] | Client-Side SPA Redirects | `public/_redirects` and `netlify.toml` configured for `/* -> /index.html 200` | Tested by refreshing non-root route on live site |
 | [x] | Production Environment Config| Secrets managed via environment variables (never committed) | `.env.example` in both folders, git check |
 | [x] | CORS Configuration | Backend accepts requests only from deployed frontend URL | Tested live cross-origin request handling |
-| [ ] | Atlas Network Whitelist | Remote MongoDB Atlas access configured for production deployment | MongoDB Atlas connection verified |
+| [x] | Atlas Network Whitelist | Remote MongoDB Atlas access configured for production deployment | MongoDB Atlas connection verified |
 
 ---
 
