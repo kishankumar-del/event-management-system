@@ -13,6 +13,7 @@ A comprehensive, production-grade MERN stack Event Management System engineered 
 - **Postman Collection:** `docs/Event_Management_System.postman_collection.json`
 - **ER Diagram:** `docs/er-diagram.md` and visual SVG `docs/er-diagram.svg`
 - **Screenshots:** High-resolution captures per role in `docs/screenshots/`
+- **Submission Project Report (PDF):** [`Vattikuti_Kishan_Kumar_Chowdary_RA2511080050003_Event_Management_System.pdf`](./Vattikuti_Kishan_Kumar_Chowdary_RA2511080050003_Event_Management_System.pdf)
 
 ---
 
