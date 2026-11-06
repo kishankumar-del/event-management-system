@@ -10,11 +10,16 @@ import { useDebounce } from './useDebounce';
 export function usePaginatedList(endpoint, defaultParams = {}) {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const defaultPage = defaultParams.page || 1;
+  const defaultLimit = defaultParams.limit || 10;
+  const defaultSort = defaultParams.sort || '-createdAt';
+  const defaultSearch = defaultParams.search || '';
+
   // Read initial values from URL or defaults
-  const initialPage = parseInt(searchParams.get('page'), 10) || defaultParams.page || 1;
-  const initialLimit = parseInt(searchParams.get('limit'), 10) || defaultParams.limit || 10;
-  const initialSearch = searchParams.get('search') || defaultParams.search || '';
-  const initialSort = searchParams.get('sort') || defaultParams.sort || '-createdAt';
+  const initialPage = parseInt(searchParams.get('page'), 10) || defaultPage;
+  const initialLimit = parseInt(searchParams.get('limit'), 10) || defaultLimit;
+  const initialSearch = searchParams.get('search') || defaultSearch;
+  const initialSort = searchParams.get('sort') || defaultSort;
 
   const [page, setPage] = useState(initialPage);
   const [limit, setLimit] = useState(initialLimit);
@@ -43,20 +48,27 @@ export function usePaginatedList(endpoint, defaultParams = {}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Sync state back to URL query parameters
+  // Sync state back to URL query parameters ONLY when different from defaults
   useEffect(() => {
     const params = new URLSearchParams();
-    if (page > 1) params.set('page', page);
-    if (limit !== 10) params.set('limit', limit);
-    if (debouncedSearch) params.set('search', debouncedSearch);
-    if (sort && sort !== '-createdAt') params.set('sort', sort);
+    if (page > 1 && page !== defaultPage) params.set('page', page);
+    // Only set limit if user explicitly provided a non-default limit in URL
+    if (searchParams.has('limit') && limit !== defaultLimit) params.set('limit', limit);
+    if (debouncedSearch && debouncedSearch !== defaultSearch) params.set('search', debouncedSearch);
+    if (sort && sort !== defaultSort) params.set('sort', sort);
 
     Object.entries(filters).forEach(([k, v]) => {
-      if (v) params.set(k, v);
+      if (v && v !== defaultParams[k]) params.set(k, v);
     });
 
-    setSearchParams(params, { replace: true });
-  }, [page, limit, debouncedSearch, sort, filters, setSearchParams]);
+    const currentString = searchParams.toString();
+    const newString = params.toString();
+
+    // Only update if query parameters actually changed to prevent URL clutter and loops
+    if (currentString !== newString) {
+      setSearchParams(params, { replace: true });
+    }
+  }, [page, limit, debouncedSearch, sort, filters, defaultPage, defaultLimit, defaultSort, defaultSearch, searchParams, setSearchParams]);
 
   // Fetch data
   const fetchData = useCallback(async () => {
