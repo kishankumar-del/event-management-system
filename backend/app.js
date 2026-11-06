@@ -13,16 +13,39 @@ const app = express();
 // Security HTTP headers
 app.use(helmet());
 
-// CORS configuration (locked to env.CORS_ORIGIN, supporting comma-separated origins or '*')
-const allowedOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim());
+// CORS configuration (supporting comma-separated origins, wildcards, or any local origin in dev)
+const allowedOrigins = (env.CORS_ORIGIN || '')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. mobile apps, curl, Postman) or matched origin
-      if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      // 1. Non-browser requests (e.g. mobile apps, curl, Postman)
+      if (!origin) return callback(null, true);
+
+      // 2. Allow if wildcard or explicitly allowed in CORS_ORIGIN
+      if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error(`CORS blocked request from origin: ${origin}`));
+
+      // 3. In development, automatically allow localhost and 127.0.0.1 on any port
+      if (env.NODE_ENV !== 'production') {
+        const isLocal = /^https?:\/\/(localhost|127\.0\.0\.1)(:[0-9]+)?$/.test(origin);
+        if (isLocal) return callback(null, true);
+      }
+
+      // 4. Match wildcard patterns like https://*.netlify.app
+      const matchesPattern = allowedOrigins.some((allowed) => {
+        if (!allowed.includes('*')) return false;
+        const regex = new RegExp('^' + allowed.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
+        return regex.test(origin);
+      });
+      if (matchesPattern) return callback(null, true);
+
+      // Cleanly reject CORS without throwing an unhandled Error
+      return callback(null, false);
     },
     credentials: true,
   })
