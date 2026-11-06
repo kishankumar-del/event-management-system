@@ -102,7 +102,7 @@
 | Status | Requirement | Scope & Constraints | Evidence / Verification Target |
 |:---:|---|---|---|
 | [x] | Backend Render Deployment | Hosted on Render with build/start commands and health check | Live at `https://event-management-backend-o2tn.onrender.com` |
-| [x] | Frontend Netlify Deployment| Hosted on Netlify with SPA redirect rules | Live on Netlify |
+| [x] | Frontend Netlify Deployment| Hosted on Netlify with SPA redirect rules | Live at `https://event-box-office.netlify.app/` |
 | [x] | Client-Side SPA Redirects | `public/_redirects` and `netlify.toml` configured for `/* -> /index.html 200` | Tested by refreshing non-root route on live site |
 | [x] | Production Environment Config| Secrets managed via environment variables (never committed) | `.env.example` in both folders, git check |
 | [x] | CORS Configuration | Backend accepts requests only from deployed frontend URL | Tested live cross-origin request handling |

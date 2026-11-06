@@ -5,10 +5,11 @@ A comprehensive, production-grade MERN stack Event Management System engineered 
 ---
 
 ## Live Deployments & Submission Pack
-- **GitHub Repository:** `https://github.com/<YOUR_GITHUB_USERNAME>/event-management-system` *(Ready for push)*
-- **Frontend URL (Netlify):** `https://<YOUR_NETLIFY_SITE>.netlify.app` *(See HUMAN_TODO.md)*
-- **Backend API URL (Render):** `https://<YOUR_RENDER_SERVICE>.onrender.com` *(See HUMAN_TODO.md)*
-- **Demo Video:** `https://<DEMO_VIDEO_LINK>` *(2–3 minutes walkthrough based on docs/demo-script.md)*
+- **GitHub Repository:** `https://github.com/kishankumar-del/event-management-system`
+- **Frontend URL (Netlify):** `https://event-box-office.netlify.app/`
+- **Backend API URL (Render):** `https://event-management-backend-o2tn.onrender.com`
+- **API Health Check:** `https://event-management-backend-o2tn.onrender.com/api/health`
+- **Demo Video:** `https://<DEMO_VIDEO_LINK>` *(Scene-by-scene script in docs/demo-script.md)*
 - **Postman Collection:** `docs/Event_Management_System.postman_collection.json`
 - **ER Diagram:** `docs/er-diagram.md` and visual SVG `docs/er-diagram.svg`
 - **Screenshots:** High-resolution captures per role in `docs/screenshots/`
